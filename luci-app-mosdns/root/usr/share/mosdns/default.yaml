@@ -97,8 +97,7 @@ plugins:
     args:
       concurrent: 2
       upstreams:
-        - addr: "114.114.114.114"
-        - addr: "114.114.115.115"
+        - addr: "127.0.0.1:8055"
 
   - tag: forward_local
     type: forward
