@@ -93,11 +93,11 @@ geodat_update() (
     [ "$google_status" -ne "204" ] && mirror="https://ghproxy.com/"
     # geoip.dat - cn-private
     echo -e "\e[1;32mDownloading "$mirror"https://github.com/Loyalsoldier/geoip/releases/latest/download/geoip-only-cn-private.dat\e[0m"
-    curl --connect-timeout 5 -m 60 --ipv4 -kfSLo "$TMPDIR/geoip.dat" ""$mirror"https://github.com/Loyalsoldier/geoip/releases/latest/download/geoip-only-cn-private.dat"
+    curl --socks5 10.10.10.4:7891 --connect-timeout 5 -m 60 --ipv4 -kfSLo "$TMPDIR/geoip.dat" ""$mirror"https://github.com/Loyalsoldier/geoip/releases/latest/download/geoip-only-cn-private.dat"
     [ $? -ne 0 ] && rm -rf "$TMPDIR" && exit 1
     # checksum - geoip.dat
     echo -e "\e[1;32mDownloading "$mirror"https://github.com/Loyalsoldier/geoip/releases/latest/download/geoip-only-cn-private.dat.sha256sum\e[0m"
-    curl --connect-timeout 5 -m 10 --ipv4 -kfSLo "$TMPDIR/geoip.dat.sha256sum" ""$mirror"https://github.com/Loyalsoldier/geoip/releases/latest/download/geoip-only-cn-private.dat.sha256sum"
+    curl --socks5 10.10.10.4:7891 --connect-timeout 5 -m 10 --ipv4 -kfSLo "$TMPDIR/geoip.dat.sha256sum" ""$mirror"https://github.com/Loyalsoldier/geoip/releases/latest/download/geoip-only-cn-private.dat.sha256sum"
     [ $? -ne 0 ] && rm -rf "$TMPDIR" && exit 1
     if [ "$(sha256sum "$TMPDIR/geoip.dat" | awk '{print $1}')" != "$(cat "$TMPDIR/geoip.dat.sha256sum" | awk '{print $1}')" ]; then
         echo -e "\e[1;31mgeoip.dat checksum error\e[0m"
@@ -107,11 +107,11 @@ geodat_update() (
 
     # geosite.dat
     echo -e "\e[1;32mDownloading "$mirror"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat\e[0m"
-    curl --connect-timeout 5 -m 120 --ipv4 -kfSLo "$TMPDIR/geosite.dat" ""$mirror"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
+    curl --socks5 10.10.10.4:7891 --connect-timeout 5 -m 120 --ipv4 -kfSLo "$TMPDIR/geosite.dat" ""$mirror"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat"
     [ $? -ne 0 ] && rm -rf "$TMPDIR" && exit 1
     # checksum - geosite.dat
     echo -e "\e[1;32mDownloading "$mirror"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat.sha256sum\e[0m"
-    curl --connect-timeout 5 -m 10 --ipv4 -kfSLo "$TMPDIR/geosite.dat.sha256sum" ""$mirror"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat.sha256sum"
+    curl --socks5 10.10.10.4:7891 --connect-timeout 5 -m 10 --ipv4 -kfSLo "$TMPDIR/geosite.dat.sha256sum" ""$mirror"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat.sha256sum"
     [ $? -ne 0 ] && rm -rf "$TMPDIR" && exit 1
     if [ "$(sha256sum "$TMPDIR/geosite.dat" | awk '{print $1}')" != "$(cat "$TMPDIR/geosite.dat.sha256sum" | awk '{print $1}')" ]; then
         echo -e "\e[1;31mgeosite.dat checksum error\e[0m"
